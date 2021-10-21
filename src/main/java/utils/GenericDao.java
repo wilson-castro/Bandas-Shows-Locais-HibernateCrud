@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import model.dao.DaoFactory;
+import model.daos.DaoFactory;
 
 @SuppressWarnings("unchecked")
 public abstract class GenericDao<T ,PK> {

@@ -1,4 +1,4 @@
-package model.entity;
+package model.entitys;
 
 public class Show {
 

@@ -1,4 +1,4 @@
-package model.dao;
+package model.daos;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -7,7 +7,7 @@ public final class DaoFactory {
 	
 	private DaoFactory() {}
 	
-	//// ENTITY MANAGER FACTORY ////
+	////// ENTITY MANAGER FACTORY //////
 	
 	private static final String  PERSISTENCE_UNIT_NAME = "projeto_JPA";
 	
@@ -19,5 +19,17 @@ public final class DaoFactory {
 		}
 		
 		return entityManagerFactoryInstance;
+	}
+	
+	////// BANDA FACTORY /////
+	
+	private static BandaDao bandaDaoInstance;
+	
+	public static BandaDao bandaDaoInstance(){
+		if (bandaDaoInstance == null) {
+			bandaDaoInstance = new BandaDao();
+		}
+		
+		return bandaDaoInstance;
 	}
 }

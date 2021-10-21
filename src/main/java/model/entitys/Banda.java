@@ -1,4 +1,4 @@
-package model.entity;
+package model.entitys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +17,8 @@ import utils.BaseBean;
 public class Banda implements BaseBean {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="bandaID",updatable = false, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="bandaID")
 	private Long id;
 	
 	@Column(name="nome", nullable = false)

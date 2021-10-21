@@ -1,4 +1,4 @@
-package model.dao;
+package model.daos;
 
 public class LocalDao {
 
