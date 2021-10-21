@@ -5,9 +5,9 @@
     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 	version="2.1">
 
-	<persistence-unit name="pessoas" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="projeto_JPA" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>  
-    
+   	<class>model.entity.Pessoa</class>
 	 <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/demo?useTimezone=true&amp;serverTimezone=UTC" />
