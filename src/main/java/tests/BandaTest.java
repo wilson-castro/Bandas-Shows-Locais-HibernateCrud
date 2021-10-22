@@ -1,5 +1,6 @@
 package tests;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.daos.BandaDao;
@@ -15,7 +16,7 @@ public class BandaTest {
 		
 		//// Save Banda test ////
 		/*
-		bandaEntity.setNome("AC/DC");
+		bandaEntity.setNome("ABC");
 		bandaEntity.setGenero(Genero.ROCK);
 		
 		System.out.println("=== Start ====");
@@ -50,7 +51,7 @@ public class BandaTest {
 		System.out.println("=== Start ====");
 		System.out.println();
 		
-		bandaEntity = bandaDao.findById(1L);
+		bandaEntity = bandaDao.findById(2L);
 		
 		System.out.println(bandaEntity.getId());
 		System.out.println(bandaEntity.getNome());
@@ -65,7 +66,6 @@ public class BandaTest {
 		System.out.println("=== Start ====");
 		System.out.println();
 		
-		bandaEntity.setNome("AC / DC");
 		bandaEntity.setGenero(Genero.FORRO);
 		
 		bandaDao.update(bandaEntity);
@@ -91,11 +91,15 @@ public class BandaTest {
 		*/
 		
 		//// Find Banda With filter ////
-		
+		/*
 		System.out.println();
 		System.out.println("=== Start ====");
 		
-		List<Banda> bandas = bandaDao.findBandaByNameAndKind("AC / DC", null);
+		ArrayList<Genero> generos = new ArrayList<>();
+		generos.add(Genero.ROCK);
+		generos.add(Genero.FORRO);
+
+		List<Banda> bandas = bandaDao.findBandaByNameAndKind("A", generos);
 		for(Banda banda: bandas) {
 			
 			System.out.println(banda.getId());
@@ -106,6 +110,7 @@ public class BandaTest {
 		}
 		System.out.println();
 		System.out.println("=== End ====");
+		*/
 		
 	}
 }
