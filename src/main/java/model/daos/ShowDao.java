@@ -1,5 +1,9 @@
 package model.daos;
 
-public class ShowDao {
+import model.entitys.Show;
+import utils.GenericDao;
+
+public class ShowDao  extends GenericDao<Show, Long> {
+	
 
 }

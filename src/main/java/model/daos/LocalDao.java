@@ -1,5 +1,8 @@
 package model.daos;
 
-public class LocalDao {
+import model.entitys.Local;
+import utils.GenericDao;
+
+public class LocalDao extends GenericDao<Local, Long> {
 
 }

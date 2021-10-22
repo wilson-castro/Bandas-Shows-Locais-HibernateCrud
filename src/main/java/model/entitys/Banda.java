@@ -28,6 +28,8 @@ public class Banda implements BaseBean {
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
 	
+	private Show shows[];
+	
 	public Banda() {
 		
 	}
@@ -37,6 +39,14 @@ public class Banda implements BaseBean {
 		this.id = id;
 		this.nome = nome;
 		this.genero = genero;
+	}
+
+	public Banda(Long id, String nome, Genero genero, Show[] shows) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.genero = genero;
+		this.shows = shows;
 	}
 
 	@Override
@@ -62,6 +72,14 @@ public class Banda implements BaseBean {
 
 	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+
+	public Show[] getShows() {
+		return shows;
+	}
+
+	public void setShows(Show[] shows) {
+		this.shows = shows;
 	}
 	
 	

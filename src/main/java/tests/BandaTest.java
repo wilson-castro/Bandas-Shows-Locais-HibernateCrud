@@ -15,7 +15,7 @@ public class BandaTest {
 		Banda bandaEntity = new Banda();
 		
 		//// Save Banda test ////
-		/*
+		
 		bandaEntity.setNome("ABC");
 		bandaEntity.setGenero(Genero.ROCK);
 		
@@ -26,10 +26,10 @@ public class BandaTest {
 		
 		System.out.println();
 		System.out.println("=== End ====");
-		*/
+		
 
 		//// List All Bandas test ////
-		/*
+		
 		System.out.println();
 		System.out.println("=== Start ====");
 		
@@ -44,7 +44,7 @@ public class BandaTest {
 		}
 		System.out.println();
 		System.out.println("=== End ====");
-		*/
+		
 		
 		//// Find a Banda test ////
 		/*
