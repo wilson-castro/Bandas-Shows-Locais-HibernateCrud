@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.daos.BandaDao;
+import model.services.BandaService;
 
 @WebServlet(urlPatterns = { "/ControllerBandas", "/bandas", "/bandas/insert", "/bandas/select", "/bandas/update",
 		"/bandas/delete" })
 public class ControllerBandas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	BandaDao dao = new BandaDao();
-
+	BandaService service = new BandaService();
+	
 	public ControllerBandas() {
 		super();
 
@@ -76,7 +77,7 @@ public class ControllerBandas extends HttpServlet {
 			dao.alterarBanda(banda, idsList);*/
 		}
 
-		response.sendRedirect("/projeto/bandas");
+		response.sendRedirect("/HibernateCrud/bandas");
 	}
 
 	protected void novaBanda(HttpServletRequest request, HttpServletResponse response)
@@ -105,19 +106,16 @@ public class ControllerBandas extends HttpServlet {
 			dao.adicionarBanda(banda, idsList);*/
 		}
 
-		response.sendRedirect("/projeto/bandas");
+		response.sendRedirect("/HibernateCrud/bandas");
 	}
 
 	protected void removerBanda(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	/*	int idBanda = Integer.parseInt(request.getParameter("idBanda"));
-		Banda banda = new Banda();
+		Long idBanda = Long.parseLong(request.getParameter("idBanda"));
 
-		banda.setIdBanda(idBanda);
-
-		dao.deletarBanda(banda);
-
-		response.sendRedirect("/projeto/bandas");*/
+		service.removerBanda(idBanda);
+		
+		response.sendRedirect("/HibernateCrud/bandas");
 
 	}
 

@@ -30,4 +30,15 @@ public class BandaService {
 		
 		return bandas;
 	}
+	
+	public void removerBanda(Long idBanda) {
+		Banda banda = procurarBanda(idBanda);
+		
+		dao.delete(banda);
+	}
+	
+	public Banda procurarBanda(Long idBanda) {
+		
+		return dao.findById(idBanda);
+	}
 }
