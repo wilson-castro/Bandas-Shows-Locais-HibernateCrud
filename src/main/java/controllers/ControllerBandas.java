@@ -14,6 +14,7 @@ import model.daos.BandaDao;
 @WebServlet(urlPatterns = { "/ControllerBandas", "/bandas", "/bandas/insert", "/bandas/select", "/bandas/update",
 		"/bandas/delete" })
 public class ControllerBandas extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	BandaDao dao = new BandaDao();
 
 	public ControllerBandas() {
@@ -34,8 +35,6 @@ public class ControllerBandas extends HttpServlet {
 			editarBanda(request, response);
 		} else if (action.equals("/bandas/delete")) {
 			removerBanda(request, response);
-		} else if (action.equals("/bandas/pesquisar")) {
-			System.out.println("pesquisar");
 		} else {
 			response.sendRedirect("index.jsp");
 		}

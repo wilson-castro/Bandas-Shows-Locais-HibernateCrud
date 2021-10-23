@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import model.daos.DaoFactory;
 import model.daos.ShowDao;
 import model.entitys.Show;
 
@@ -12,7 +13,7 @@ public class ShowService {
 	private ShowDao dao;
 	
 	public ShowService() {
-		this.dao = new ShowDao();
+		this.dao = DaoFactory.ShowDaoInstance();
 	}
 	
 	public void salvar(Show shwo) {

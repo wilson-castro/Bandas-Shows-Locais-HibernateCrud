@@ -32,4 +32,28 @@ public final class DaoFactory {
 		
 		return bandaDaoInstance;
 	}
+	
+	////// LOCAL FACTORY /////
+	
+	private static LocalDao LocalDaoInstance;
+	
+	public static LocalDao LocalDaoInstance(){
+		if (LocalDaoInstance == null) {
+			LocalDaoInstance = new LocalDao();
+		}
+		
+		return LocalDaoInstance;
+	}
+	
+	////// SHOW FACTORY /////
+	
+	private static ShowDao ShowDaoInstance;
+	
+	public static ShowDao ShowDaoInstance(){
+		if (ShowDaoInstance == null) {
+			ShowDaoInstance = new ShowDao();
+		}
+		
+		return ShowDaoInstance;
+	}
 }

@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,12 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.daos.BandaDao;
+import model.entitys.Banda;
+import model.enums.Genero;
+import model.services.BandaService;
 
 @WebServlet("/ListarBandas")
 public class ListarBandas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	BandaDao dao = new BandaDao();
+	BandaService bandaService = new BandaService();
 	
     public ListarBandas() {
         super();
@@ -22,11 +26,11 @@ public class ListarBandas extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*ArrayList<Banda> bandas = dao.listarBandas();
+		List<Banda> bandas = bandaService.listarBandas();
 
 		request.setAttribute("bandas", bandas);
-		RequestDispatcher rd = request.getRequestDispatcher("TabelaBandas.jsp");
-		rd.forward(request, response);*/
+		RequestDispatcher rd = request.getRequestDispatcher("tabelaBandas.jsp");
+		rd.forward(request, response);
 		
 	}
 	
@@ -34,28 +38,27 @@ public class ListarBandas extends HttpServlet {
 		String nome = request.getParameter("nome");
 		
 		if (request.getParameterValues("listGeneros") == null ) {
-		/*	Genero[] generos= new Genero[0];
 			
-			ArrayList<Banda> bandas = dao.listarBandasComFiltro(nome, generos);
+			List<Banda> bandas = bandaService.listarBandaPorNomeEGenero(nome, null);
 			
-			request.setAttribute("bandas", bandas);*/
-			RequestDispatcher rd = request.getRequestDispatcher("TabelaBandas.jsp");
+			request.setAttribute("bandas", bandas);
+			RequestDispatcher rd = request.getRequestDispatcher("tabelaBandas.jsp");
 			rd.forward(request, response);
 			
 		}else {
-			/*String[] checkboxlistGeneros = request.getParameterValues("listGeneros");
+			String[] checkboxlistGeneros = request.getParameterValues("listGeneros");
 			int qtdGeneros = checkboxlistGeneros.length;
 			
-			Genero[] generos= new Genero[qtdGeneros];
+			ArrayList<Genero> generos = new ArrayList<Genero>();
 						
 			for (int i = 0; i < qtdGeneros; i++) {
-				generos[i] = Genero.valueOf(checkboxlistGeneros[i]);
+			generos.add(Genero.valueOf(checkboxlistGeneros[i]));
 			}
 			
-			ArrayList<Banda> bandas = dao.listarBandasComFiltro(nome, generos);
+			List<Banda> bandas = bandaService.listarBandaPorNomeEGenero(nome, generos);
 			
-			request.setAttribute("bandas", bandas);*/
-			RequestDispatcher rd = request.getRequestDispatcher("TabelaBandas.jsp");
+			request.setAttribute("bandas", bandas);
+			RequestDispatcher rd = request.getRequestDispatcher("tabelaBandas.jsp");
 			rd.forward(request, response);
 		}
 		

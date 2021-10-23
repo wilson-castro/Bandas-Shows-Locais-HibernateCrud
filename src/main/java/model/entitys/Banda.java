@@ -1,5 +1,8 @@
 package model.entitys;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import model.enums.Genero;
@@ -28,7 +34,10 @@ public class Banda implements BaseBean {
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
 	
-	private Show shows[];
+	@ManyToMany
+	@JoinTable(name="shows_da_banda", joinColumns = @JoinColumn(name="bandaID")
+	,inverseJoinColumns = @JoinColumn(name="showID"))
+	private List<Show> shows;
 	
 	public Banda() {
 		
@@ -41,7 +50,7 @@ public class Banda implements BaseBean {
 		this.genero = genero;
 	}
 
-	public Banda(Long id, String nome, Genero genero, Show[] shows) {
+	public Banda(Long id, String nome, Genero genero, List<Show> shows) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -74,14 +83,13 @@ public class Banda implements BaseBean {
 		this.genero = genero;
 	}
 
-	public Show[] getShows() {
+	public List<Show> getShows() {
 		return shows;
 	}
 
-	public void setShows(Show[] shows) {
+	public void setShows(List<Show> shows) {
 		this.shows = shows;
 	}
-	
-	
+
 	
 }
