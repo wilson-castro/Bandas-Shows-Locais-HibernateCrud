@@ -23,7 +23,7 @@ List<Banda> bandas = (List<Banda>) request.getAttribute("bandas");
 </head>
 <body>
 	<h1>Lista de bandas</h1>
-		<a href="formControlBandas?operation=novo" class="Botao1">Novo</a>
+		<a href="FormControlBandas?operation=novo" class="Botao1">Novo</a>
 
 		<form name="form" method="POST" action="ListarBandas">
 			<div class="filtros">

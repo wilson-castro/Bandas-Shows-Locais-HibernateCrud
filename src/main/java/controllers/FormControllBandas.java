@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.services.BandaService;
+
 
 @WebServlet("/FormControlBandas")
 public class FormControllBandas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    BandaService bandaService = new BandaService();
+    
    
     public FormControllBandas() {
         super();
