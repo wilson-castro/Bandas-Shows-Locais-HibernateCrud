@@ -101,7 +101,7 @@ public class ControllerShows extends HttpServlet {
 			dao.alterarShow(show, idsList);*/
 		}
 		
-		response.sendRedirect("/projeto/shows");
+		response.sendRedirect("/HibernateCrud/shows");
 	}
 	
 	protected void removerShow(HttpServletRequest request, HttpServletResponse response)
@@ -113,7 +113,7 @@ public class ControllerShows extends HttpServlet {
 		
 		dao.deletarShow(show);
 			
-		response.sendRedirect("/projeto/shows");*/
+		response.sendRedirect("/HibernateCrud/shows");*/
 
 	}
 

@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.daos.LocalDao;
+import model.entitys.Local;
+import model.services.LocalService;
 
 
 @WebServlet(urlPatterns = { "/ControllerLocais", "/locais","/locais/delete","/locais/insert",
 		"/locais/select","/locais/update" })
 public class ControllerLocais extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       LocalDao dao = new LocalDao();
-   
+	LocalService localService = new LocalService();
+	
     public ControllerLocais() {
         super();
     }
-
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getServletPath();
@@ -49,19 +50,19 @@ public class ControllerLocais extends HttpServlet {
 	
 	protected void novoLocal(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*Local local = new Local();
+		Local local = new Local();
 		
 		String nome =  request.getParameter("nome");
 		int capacidade = Integer.parseInt(request.getParameter("capacidade"));
 		
 		local.setNome(nome);
-		local.setCapacidade(capacidade);*/
+		local.setCapacidade(capacidade);
 
 		if (request.getParameterValues("List_ShowsIDs") == null ) {
-			//dao.adicionarLocal(local, null);
+			localService.salvar(local);
 						
 		}else {
-			/*String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
+			String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
 			int size = checkboxIdsList.length;
 						
 			int[] idsList = new int[size];
@@ -69,10 +70,10 @@ public class ControllerLocais extends HttpServlet {
 			for (int i = 0; i < size; i++) {
 			    idsList[i] = Integer.parseInt(checkboxIdsList[i]);
 			}
-			dao.adicionarLocal(local, idsList);*/
+			localService.salvar(local, idsList);
 		}
 		
-		response.sendRedirect("/projeto/locais");
+		response.sendRedirect("/HibernateCrud/locais");
 	}
 	
 	protected void editarLocal(HttpServletRequest request, HttpServletResponse response)
@@ -102,7 +103,7 @@ public class ControllerLocais extends HttpServlet {
 			dao.alterarLocal(local, idsList);*/
 		}
 		
-		response.sendRedirect("/projeto/locais");
+		response.sendRedirect("/HibernateCrud/locais");
 	}
 	
 	protected void removerLocal(HttpServletRequest request, HttpServletResponse response)

@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.entitys.Show;
+import model.services.ShowService;
 
 
 @WebServlet("/FormControlLocais")
@@ -21,12 +25,11 @@ public class FormControllLocais extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("operation");
+		ShowService showService = new ShowService();
 		
 		if(operation.equals("novo")) {
-			
-			/*ShowDAO ShowDao = new ShowDAO();
-			
-			ArrayList<Show> listaShow = ShowDao.listarShows();
+						
+			List<Show> shows = showService.listarShows();
 			
 			request.setAttribute("titulo", "Criar");
 			request.setAttribute("txtBotao", "Adicionar");
@@ -34,9 +37,9 @@ public class FormControllLocais extends HttpServlet {
 			request.setAttribute("textoInputNome", "");
 			request.setAttribute("textoInputCapacidade", "1");
 			request.setAttribute("defaultInput", "Digite um nome...");
-			request.setAttribute("shows", listaShow);*/
+			request.setAttribute("shows", shows);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("FormularioLocais.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("formularioLocais.jsp");
 			rd.forward(request, response);
 		}else if(operation.equals("editar")){
 			/*Local local = new Local();
@@ -62,7 +65,7 @@ public class FormControllLocais extends HttpServlet {
 			request.setAttribute("listaShowsLocais", listaShowLocal);
 			request.setAttribute("local", local);*/
 			
-			RequestDispatcher rd = request.getRequestDispatcher("FormularioLocais.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("formularioLocais.jsp");
 			rd.forward(request, response);
 		} else {
 			response.sendRedirect("ListarLocais");

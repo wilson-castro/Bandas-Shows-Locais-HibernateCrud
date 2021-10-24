@@ -17,6 +17,7 @@ List<Banda> bandas = (List<Banda>) request.getAttribute("bandas");
 	}
 	
 	table {
+	  margin-top:7px;
 	  border-collapse: collapse;
 	}
 </style>

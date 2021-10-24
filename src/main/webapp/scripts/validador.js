@@ -6,10 +6,6 @@ function validar() {
 	let nome = form.nome.value;
 	let genero = form.selectGeneros.value;
 	
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const operation = urlParams.get('operation')
-	
 	if (nome === "") {
 		alert("Preencha  o campo 'Nome'")
 		form.nome.focus();
@@ -28,11 +24,9 @@ function validarShow() {
 	let data = form.data.value;
 	let locais = form.selectLocais.value;
 	
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const operation = urlParams.get('operation')
+	const todayDate =  new Date().toLocaleDateString('en-CA');
 	
-	if (data === "2020-10-13") {
+	if (data === todayDate) {
 		alert("Preencha  o campo 'data'")
 		form.data.focus();
 		return false;
@@ -49,12 +43,7 @@ function validarShow() {
 function validarLocal(){
 	let nome = form.nome.value;
 	let capacidade = ""+form.capacidade.value;
-	
-	
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const operation = urlParams.get('operation');
-	
+		
 		if (nome === "") {
 		alert("Preencha  o campo 'nome'")
 		form.nome.focus();

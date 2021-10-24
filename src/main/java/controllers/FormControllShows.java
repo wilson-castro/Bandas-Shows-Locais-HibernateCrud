@@ -1,6 +1,10 @@
 package controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.entitys.Banda;
+import model.entitys.Local;
+import model.services.BandaService;
+import model.services.LocalService;
 
 
 @WebServlet("/FormControlShows")
@@ -22,26 +31,26 @@ public class FormControllShows extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("operation");
 		
+		LocalService localserService = new LocalService();
+		BandaService bandaService = new BandaService();
+		
+		List<Local> locais = localserService.listarLocais();
+		List<Banda> bandas = bandaService.listarBandas();
+		
 		if(operation.equals("novo")) {
 			
-		/*	LocalDAO localDao = new LocalDAO();
-			BandaDAO bandaDao = new BandaDAO();
-			
-			ArrayList<Local> listaLocais = new ArrayList<Local>();
-			listaLocais = localDao.listarLocais();
-			
-			ArrayList<Banda> listaBandas = new ArrayList<Banda>();
-			listaBandas = bandaDao.listarBandas();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        Date date = new Date();
 			
 			request.setAttribute("titulo", "Criar");
 			request.setAttribute("selected", "-selecione-");
-			request.setAttribute("dataDefault", "2020-10-13");
+			request.setAttribute("dataDefault", dateFormat.format(date)+"");
 			request.setAttribute("txtBotao", "Adicionar");
-			request.setAttribute("locais", listaLocais);
-			request.setAttribute("bandas", listaBandas);
-			request.setAttribute("actionForm", "shows/insert");*/
+			request.setAttribute("locais", locais);
+			request.setAttribute("bandas", bandas);
+			request.setAttribute("actionForm", "shows/insert");
 
-			RequestDispatcher rd = request.getRequestDispatcher("FormularioShows.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("formularioShows.jsp");
 			rd.forward(request, response);
 		}else if(operation.equals("editar")){
 			/*Show show = new Show();
@@ -82,7 +91,7 @@ public class FormControllShows extends HttpServlet {
 			request.setAttribute("actionForm", "shows/update");*/
 			
 			
-			RequestDispatcher rd = request.getRequestDispatcher("FormularioShows.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("formularioShows.jsp");
 			rd.forward(request, response);
 			
 			
