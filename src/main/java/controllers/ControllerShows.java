@@ -79,22 +79,23 @@ public class ControllerShows extends HttpServlet {
 	}
 	protected void editarShow(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*int idShow = Integer.parseInt(request.getParameter("idShow"));
-		Show show = new Show();
+		Long idShow = Long.parseLong(request.getParameter("idShow"));
+		LocalService localService = new LocalService();
 		
-		show.setIdShow(idShow);
-		
-		String data =  request.getParameter("data");
-		int idLocal = Integer.parseInt(request.getParameter("selectLocais"));
+		Show show = showService.procurarShow(idShow);
 				
-		show.setIdLocal(idLocal);
-		show.setData(data);*/
+		String data =  request.getParameter("data");
+		Long idLocal = Long.parseLong(request.getParameter("selectLocais"));
+		
+		Local local = localService.procurarLocal(idLocal);
+		
+		show.setLocal_do_show(local);
 
 		if (request.getParameterValues("List_BandaIDs") == null ) {
-			//dao.alterarShow(show, null);
+			showService.salvarShowComDataString(show, data);
 						
 		}else {
-			/*String[] checkboxIdsList = request.getParameterValues("List_BandaIDs");
+			String[] checkboxIdsList = request.getParameterValues("List_BandaIDs");
 			int size = checkboxIdsList.length;
 						
 			int[] idsList = new int[size];
@@ -102,7 +103,7 @@ public class ControllerShows extends HttpServlet {
 			for (int i = 0; i < size; i++) {
 			    idsList[i] = Integer.parseInt(checkboxIdsList[i]);
 			}
-			dao.alterarShow(show, idsList);*/
+			showService.salvarShowComDataString(show, data, idsList);
 		}
 		
 		response.sendRedirect("/HibernateCrud/shows");

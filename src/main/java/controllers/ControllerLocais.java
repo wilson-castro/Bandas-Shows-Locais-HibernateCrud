@@ -77,21 +77,20 @@ public class ControllerLocais extends HttpServlet {
 	
 	protected void editarLocal(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*Local local = new Local();
+		Long idLocal = Long.parseLong(request.getParameter("idLocal"));
+		Local local = localService.procurarLocal(idLocal);
 		
 		String nome =  request.getParameter("nome");
 		int capacidade = Integer.parseInt(request.getParameter("capacidade"));
-		int idLocal = Integer.parseInt(request.getParameter("idLocal"));
 
-		local.setIdLocal(idLocal);
 		local.setNome(nome);
-		local.setCapacidade(capacidade);*/
+		local.setCapacidade(capacidade);
 		
 		if (request.getParameterValues("List_ShowsIDs") == null ) {
-			//dao.alterarLocal(local, null);
+			localService.alterarLocal(local);
 						
 		}else {
-		/*	String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
+			String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
 			int size = checkboxIdsList.length;
 						
 			int[] idsList = new int[size];
@@ -99,7 +98,7 @@ public class ControllerLocais extends HttpServlet {
 			for (int i = 0; i < size; i++) {
 			    idsList[i] = Integer.parseInt(checkboxIdsList[i]);
 			}
-			dao.alterarLocal(local, idsList);*/
+			localService.alterarLocal(local, idsList);
 		}
 		
 		response.sendRedirect("/HibernateCrud/locais");

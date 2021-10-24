@@ -88,7 +88,58 @@ public class ShowService {
 
 		return showsFiltrados;
 	}
+	
+	public void alterarShow(Show show) {
+		dao.update(show);
+	}
+	
+	public void alterarShow(Show show, String data_show) {
+		Calendar dataConvertida = null;
 
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		dataConvertida = Calendar.getInstance();
+		dataConvertida.setTime(date);
+
+		show.setData(dataConvertida);
+		alterarShow(show);
+
+	}
+
+	public void alterarShow(Show show, String data_show, int[] bandasIds) {
+		Calendar dataConvertida = null;
+
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		dataConvertida = Calendar.getInstance();
+		dataConvertida.setTime(date);
+
+		show.setData(dataConvertida);
+
+		List<Banda> bandas = new ArrayList<Banda>();
+
+		for (int i = 0; i < bandasIds.length; i++) {
+			BandaService bandaService = new BandaService();
+			Banda banda = bandaService.procurarBanda((long) bandasIds[i]);
+
+			bandas.add(banda);
+		}
+
+		show.setBandas(bandas);
+
+		alterarShow(show);
+
+	}
 	public void removerShow(Long idLocal) {
 		Show show = procurarShow(idLocal);
 

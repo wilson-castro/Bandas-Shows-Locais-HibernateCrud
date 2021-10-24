@@ -52,6 +52,28 @@ private LocalDao dao;
 
 	}
 	
+	public void alterarLocal(Local local) {
+		dao.update(local);
+		
+	}
+	
+	public void alterarLocal(Local local , int[] showsIds) {
+
+		List<Show> shows = new ArrayList<Show>();
+
+		for (int i = 0; i < showsIds.length; i++) {
+			ShowService showService = new ShowService();
+			Show show = showService.procurarShow((long) showsIds[i]);
+
+			shows.add(show);
+		}
+
+		local.setShows(shows);
+
+		alterarLocal(local);
+
+	}
+	
 	public Local procurarLocal(Long idLocal) {
 		
 		return dao.findById(idLocal);

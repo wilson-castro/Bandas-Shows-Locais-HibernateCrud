@@ -10,14 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.entitys.Local;
 import model.entitys.Show;
+import model.services.LocalService;
 import model.services.ShowService;
 
 
 @WebServlet("/FormControlLocais")
 public class FormControllLocais extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+	LocalService localService = new LocalService();
 
     public FormControllLocais() {
         super();
@@ -44,28 +46,18 @@ public class FormControllLocais extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("formularioLocais.jsp");
 			rd.forward(request, response);
 		}else if(operation.equals("editar")){
-			/*Local local = new Local();
-			LocalDAO localDao = new LocalDAO();
-			ShowDAO ShowDao = new ShowDAO();
-			ShowsLocalDAO showsLocalDao = new ShowsLocalDAO();
+			Long idLocal = Long.parseLong(request.getParameter("idLocal")); 
 			
-			int idLocal = Integer.parseInt(request.getParameter("idLocal")); 	
-			
-			local.setIdLocal(idLocal);
-			localDao.selecionarLocal(local);
-			
-			ArrayList<Show> listaShow = ShowDao.listarShows();
-			ArrayList<ShowsLocal> listaShowLocal = showsLocalDao.listarShowPorLocalPorIdLocal(local.getIdLocal());
-			
+			Local local = localService.procurarLocal(idLocal);			
+		
 			request.setAttribute("titulo", "Editar");
 			request.setAttribute("txtBotao", "Alterar");
 			request.setAttribute("actionForm", "locais/update");
 			request.setAttribute("textoInputNome", local.getNome());
 			request.setAttribute("textoInputCapacidade", local.getCapacidade());
 			request.setAttribute("defaultInput", "");
-			request.setAttribute("shows", listaShow);
-			request.setAttribute("listaShowsLocais", listaShowLocal);
-			request.setAttribute("local", local);*/
+			request.setAttribute("shows", shows);
+			request.setAttribute("local", local);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("formularioLocais.jsp");
 			rd.forward(request, response);

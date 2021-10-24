@@ -15,15 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.entitys.Banda;
 import model.entitys.Local;
+import model.entitys.Show;
 import model.services.BandaService;
 import model.services.LocalService;
+import model.services.ShowService;
 
 
 @WebServlet("/FormControlShows")
 public class FormControllShows extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	  
+    ShowService showService = new ShowService();
+	BandaService bandaService = new BandaService();
+
     public FormControllShows() {
         super();
     }
@@ -32,7 +35,6 @@ public class FormControllShows extends HttpServlet {
 		String operation = request.getParameter("operation");
 		
 		LocalService localserService = new LocalService();
-		BandaService bandaService = new BandaService();
 		
 		List<Local> locais = localserService.listarLocais();
 		List<Banda> bandas = bandaService.listarBandas();
@@ -53,42 +55,24 @@ public class FormControllShows extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("formularioShows.jsp");
 			rd.forward(request, response);
 		}else if(operation.equals("editar")){
-			/*Show show = new Show();
-			ShowBanda sb = new ShowBanda();
-
-			LocalDAO localDao = new LocalDAO();
-			BandaDAO bandaDao = new BandaDAO();
-			ShowDAO showDao = new ShowDAO();
-			ShowsBandaDAO showbandaDao = new ShowsBandaDAO();
 			
-			int idShow = Integer.parseInt(request.getParameter("idShow"));
+			Long idShow = Long.parseLong(request.getParameter("idShow"));
+		
+			Show show = showService.procurarShow(idShow);
 			
-			show.setIdShow(idShow);
-			showDao.selecionarShow(show);
-			
-			sb.setId_show(idShow);
-			
-			ArrayList<Local> listaLocais = new ArrayList<Local>();
-			listaLocais = localDao.listarLocais();
-			
-			ArrayList<Banda> listaBandas = new ArrayList<Banda>();
-			listaBandas = bandaDao.listarBandas();
-			
-        	ArrayList<ShowBanda> listaBandaShow = showbandaDao.selecionarShowsPorBanda(sb);
 					
 			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 			String dataFormat = formatDate.format(show.getData().getTime());
 			
 			request.setAttribute("titulo", "Editar");
-			request.setAttribute("selected", show.getIdLocal());
+			request.setAttribute("selected", show.getLocal_do_show().getId());
 			request.setAttribute("dataDefault", dataFormat);
 			request.setAttribute("txtBotao", "Alterar");
-			request.setAttribute("locais", listaLocais);
-			request.setAttribute("bandas", listaBandas);
+			request.setAttribute("locais", locais);
+			request.setAttribute("bandas", bandas);
 			request.setAttribute("show", show);
-			request.setAttribute("ShowsDaBanda", listaBandaShow);
 
-			request.setAttribute("actionForm", "shows/update");*/
+			request.setAttribute("actionForm", "shows/update");
 			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("formularioShows.jsp");

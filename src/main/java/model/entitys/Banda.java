@@ -33,7 +33,7 @@ public class Banda implements BaseBean {
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
 	
-	@ManyToMany
+	@ManyToMany()
 	@JoinTable(name="shows_da_banda", joinColumns = @JoinColumn(name="bandaID")
 	,inverseJoinColumns = @JoinColumn(name="showID"))
 	private List<Show> shows;

@@ -55,11 +55,6 @@ public class BandaService {
 		dao.delete(banda);
 	}
 	
-	public void alterarBanda(Long idBanda) {
-		Banda banda = procurarBanda(idBanda);
-		
-		dao.update(banda);
-	}
 	
 	public void alterarBanda(Banda banda) {		
 		dao.update(banda);
