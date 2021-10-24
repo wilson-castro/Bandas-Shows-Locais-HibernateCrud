@@ -3,9 +3,9 @@ package model.entitys;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +29,8 @@ public class Show {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "local_id")
 	private Local local_do_show;
 	
 	@ManyToMany(mappedBy = "shows")

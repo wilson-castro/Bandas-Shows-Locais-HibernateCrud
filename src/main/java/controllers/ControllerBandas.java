@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.daos.BandaDao;
+import model.entitys.Banda;
+import model.enums.Genero;
 import model.services.BandaService;
 
 @WebServlet(urlPatterns = { "/ControllerBandas", "/bandas", "/bandas/insert", "/bandas/select", "/bandas/update",
 		"/bandas/delete" })
 public class ControllerBandas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	BandaService service = new BandaService();
+	BandaService bandaService = new BandaService();
 	
 	public ControllerBandas() {
 		super();
@@ -51,22 +52,22 @@ public class ControllerBandas extends HttpServlet {
 
 	protected void editarBanda(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*Banda banda = new Banda();
+		Long idBanda = Long.parseLong(request.getParameter("idBanda"));
+		
+		Banda banda = bandaService.procurarBanda(idBanda);
 
-		int idBanda = Integer.parseInt(request.getParameter("idBanda"));
 		String nome = request.getParameter("nome");
 		String generoString = request.getParameter("selectGeneros");
 		Genero genero = Genero.valueOf(generoString);
 
-		banda.setIdBanda(idBanda);
 		banda.setGenero(genero);
-		banda.setNome(nome);*/
+		banda.setNome(nome);
 
 		if (request.getParameterValues("List_ShowsIDs") == null) {
-		//	dao.alterarBanda(banda, null);
+			bandaService.alterarBanda(banda);
 
 		} else {
-			/*String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
+			String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
 			int size = checkboxIdsList.length;
 
 			int[] idsList = new int[size];
@@ -74,7 +75,7 @@ public class ControllerBandas extends HttpServlet {
 			for (int i = 0; i < size; i++) {
 				idsList[i] = Integer.parseInt(checkboxIdsList[i]);
 			}
-			dao.alterarBanda(banda, idsList);*/
+			bandaService.alterarBanda(banda, idsList);
 		}
 
 		response.sendRedirect("/HibernateCrud/bandas");
@@ -82,20 +83,20 @@ public class ControllerBandas extends HttpServlet {
 
 	protected void novaBanda(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	/*	Banda banda = new Banda();
+		Banda banda = new Banda();
 
 		String nome = request.getParameter("nome");
 		String generoString = request.getParameter("selectGeneros");
 		Genero genero = Genero.valueOf(generoString);
 
 		banda.setGenero(genero);
-		banda.setNome(nome);*/
-
+		banda.setNome(nome);
+		
 		if (request.getParameterValues("List_ShowsIDs") == null) {
-		//	dao.adicionarBanda(banda, null);
+			bandaService.salvar(banda);
 
 		} else {
-		/*	String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
+	        String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
 			int size = checkboxIdsList.length;
 
 			int[] idsList = new int[size];
@@ -103,7 +104,7 @@ public class ControllerBandas extends HttpServlet {
 			for (int i = 0; i < size; i++) {
 				idsList[i] = Integer.parseInt(checkboxIdsList[i]);
 			}
-			dao.adicionarBanda(banda, idsList);*/
+			bandaService.salvar(banda, idsList);
 		}
 
 		response.sendRedirect("/HibernateCrud/bandas");
@@ -113,7 +114,7 @@ public class ControllerBandas extends HttpServlet {
 			throws ServletException, IOException {
 		Long idBanda = Long.parseLong(request.getParameter("idBanda"));
 
-		service.removerBanda(idBanda);
+		bandaService.removerBanda(idBanda);
 		
 		response.sendRedirect("/HibernateCrud/bandas");
 

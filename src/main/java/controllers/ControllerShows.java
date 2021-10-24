@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -111,14 +110,11 @@ public class ControllerShows extends HttpServlet {
 	
 	protected void removerShow(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*int idShow = Integer.parseInt(request.getParameter("idShow"));
-		Show show = new Show();
-
-		show.setIdShow(idShow);
-		
-		dao.deletarShow(show);
+		Long idShow = Long.parseLong(request.getParameter("idShow"));		
+	
+		showService.removerShow(idShow);
 			
-		response.sendRedirect("/HibernateCrud/shows");*/
+		response.sendRedirect("/HibernateCrud/shows");
 
 	}
 

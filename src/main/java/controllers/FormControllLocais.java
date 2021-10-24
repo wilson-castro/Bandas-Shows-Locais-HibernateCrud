@@ -27,9 +27,12 @@ public class FormControllLocais extends HttpServlet {
 		String operation = request.getParameter("operation");
 		ShowService showService = new ShowService();
 		
+		List<Show> shows = showService.listarShows();
+
+		request.setAttribute("shows", shows);
+		
 		if(operation.equals("novo")) {
 						
-			List<Show> shows = showService.listarShows();
 			
 			request.setAttribute("titulo", "Criar");
 			request.setAttribute("txtBotao", "Adicionar");
@@ -37,7 +40,6 @@ public class FormControllLocais extends HttpServlet {
 			request.setAttribute("textoInputNome", "");
 			request.setAttribute("textoInputCapacidade", "1");
 			request.setAttribute("defaultInput", "Digite um nome...");
-			request.setAttribute("shows", shows);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("formularioLocais.jsp");
 			rd.forward(request, response);

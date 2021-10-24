@@ -6,7 +6,7 @@
 <%@ page import="model.entitys.Show" %>
 <%@ page import="model.entitys.Local" %>
 <%
-List<Show> shows= new ArrayList<Show>();
+List<Show> shows = (List<Show>) request.getAttribute("shows");
 List<Integer> idsIguaisShows = new ArrayList<Integer>();
 																															
 String titulo = request.getAttribute("titulo").toString();
@@ -49,7 +49,7 @@ String dataFormat = "";
 				
 				
 			<h5>Shows</h5>
-			<div class="group-checkbox">
+			<div class="group-checkbox" style="margin-bottom: 10px;">
 				<% for(Show show : shows){ %>
 					<input type="checkbox"
 					 id="<%=show.getId()%>"
@@ -57,11 +57,16 @@ String dataFormat = "";
 					>
 					<label for="<%= show.getId() %>">
 						<strong>ID</strong>: <%= show.getId() %> -
-						<strong>Data</strong>: <%
-						dataFormat = formatDate.format(show.getData().getTime());
-						out.print(dataFormat);
-						%> -
-						<strong>Nº Bandas</strong>: <%= show.getBandas().size() %>
+						<strong>Data</strong>:
+							<%
+								dataFormat = formatDate.format(show.getData().getTime());
+								out.print(dataFormat);
+							%> -
+						<strong>Nº Bandas</strong>:
+							<%
+								int numBandas = show.getBandas() !=null? show.getBandas().size():0;
+								out.print(numBandas);
+							%>
 					 </label><br>
 				<%}%>
 			</div>

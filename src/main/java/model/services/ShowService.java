@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import model.daos.DaoFactory;
 import model.daos.ShowDao;
 import model.entitys.Banda;
 import model.entitys.Show;
@@ -16,7 +15,7 @@ public class ShowService {
 	private ShowDao dao;
 
 	public ShowService() {
-		this.dao = DaoFactory.ShowDaoInstance();
+		this.dao = new ShowDao();
 	}
 
 	public void salvar(Show show) {

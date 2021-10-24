@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.entitys.Banda;
 import model.entitys.Show;
 import model.services.BandaService;
 import model.services.ShowService;
@@ -30,11 +31,10 @@ public class FormControllBandas extends HttpServlet {
 		String operation = request.getParameter("operation");
 		ShowService showService  =new ShowService();
 		
+		List<Show> shows = showService.listarShows();
+		
 		if(operation.equals("novo")) {
-			
-			List<Show> shows = showService.listarShows();
-
-			
+						
 			request.setAttribute("titulo", "Criar");
 			request.setAttribute("defaultInput", "Digite um nome...");
 			request.setAttribute("selected", "-selecione-");
@@ -46,32 +46,18 @@ public class FormControllBandas extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("formularioBandas.jsp");
 			rd.forward(request, response);
 		}else if(operation.equals("editar")){
-			/*Banda banda = new Banda();
-			BandaDAO dao = new BandaDAO();
+			Long idBanda = Long.parseLong(request.getParameter("idBanda"));
 			
-			int idBanda = Integer.parseInt(request.getParameter("idBanda"));
-			
-			banda.setIdBanda(idBanda);
-			dao.selecionarBanda(banda);
-			
-			ShowsLocalDAO showDao = new ShowsLocalDAO();
-			ShowsBandaDAO showbandaDao = new ShowsBandaDAO();
-			
-			ShowBanda sb = new ShowBanda();
-			sb.setId_banda(idBanda);
-			
-        	ArrayList<ShowsLocal> listaShows = showDao.listarShowPorLocal();
-        	ArrayList<ShowBanda> listaShowBanda = showbandaDao.selecionarBandasPorShow(sb);
+			Banda banda = bandaService.procurarBanda(idBanda);
         	
 			request.setAttribute("titulo", "Editar");
 			request.setAttribute("defaultInput", "");
 			request.setAttribute("selected", banda.getGenero().toString());
 			request.setAttribute("txtBotao", "Alterar");
 			request.setAttribute("textoInputNome", banda.getNome());
-			request.setAttribute("shows", listaShows);
+			request.setAttribute("shows", shows);
 			request.setAttribute("Banda", banda);			
-			request.setAttribute("ShowsDaBanda", listaShowBanda);
-			request.setAttribute("actionForm", "bandas/update");*/
+			request.setAttribute("actionForm", "bandas/update");
 			
 			RequestDispatcher rd = request.getRequestDispatcher("formularioBandas.jsp");
 			rd.forward(request, response);

@@ -40,7 +40,7 @@ List<Local> locais = (List<Local>) request.getAttribute("locais");
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>ONDE</th>
+				<th>Nome</th>
 				<th>Nº de Shows</th>
 				<th>Capacidade</th>
 				<th>Ações</th>

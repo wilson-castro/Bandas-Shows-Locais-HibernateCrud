@@ -6,7 +6,7 @@
 <%
 List<Show> shows = (List<Show>) request.getAttribute("shows");
 
-SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 String dataFormat = "";
 %>
 <!DOCTYPE html>
@@ -57,7 +57,13 @@ String dataFormat = "";
 			%>
 			<tr>
 				<td><%=show.getId()%></td>
-				<td><%=show.getLocal_do_show().getNome()%></td>
+				<td>
+					<%
+						String nomeLocal = show.getLocal_do_show() != null ? 
+								show.getLocal_do_show().getNome() : "";
+					  out.print(nomeLocal);
+
+					%>
 				<td>
 					<%
 					  dataFormat = formatDate.format(show.getData().getTime());
@@ -70,7 +76,13 @@ String dataFormat = "";
 					  out.print(numBandas);
 					%>
 				</td>
-				<td><%=show.getLocal_do_show().getCapacidade()%></td>
+				<td>
+					<%
+						int capacidadeLocal = show.getLocal_do_show() != null?
+								show.getLocal_do_show().getCapacidade(): 0;
+						out.print(capacidadeLocal);
+					%>
+				</td>
 				<td>
 					<a href="FormControlShows?operation=editar&idShow=<%=show.getId()%>" class="Botao1">Editar</a>
 					<a href="javascript: confirmarShow(<%= show.getId() %>)" class="Botao2">Excluir</a>

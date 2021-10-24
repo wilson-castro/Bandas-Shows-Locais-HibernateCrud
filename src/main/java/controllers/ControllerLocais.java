@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.daos.LocalDao;
 import model.entitys.Local;
 import model.services.LocalService;
 
@@ -108,14 +107,11 @@ public class ControllerLocais extends HttpServlet {
 	
 	protected void removerLocal(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*int idLocal = Integer.parseInt(request.getParameter("idLocal"));
+		Long idLocal = Long.parseLong(request.getParameter("idLocal"));
 		
-		Local local = new Local();
-		local.setIdLocal(idLocal);
+		localService.removerLocal(idLocal);
 		
-		dao.deletarLocal(local);
-			
-		response.sendRedirect("/projeto/locais");*/
+		response.sendRedirect("/HibernateCrud/locais");
 
 	}
  

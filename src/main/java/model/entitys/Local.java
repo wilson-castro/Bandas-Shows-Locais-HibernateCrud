@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,9 +31,10 @@ public class Local implements BaseBean {
 	private int capacidade;
 	
 	@OneToMany( 
-		targetEntity = Show.class,
-		mappedBy="local_do_show" , fetch = FetchType.LAZY, 
-		cascade = CascadeType.ALL, orphanRemoval = true
+		mappedBy="local_do_show" ,
+	    fetch = FetchType.EAGER,
+		cascade = CascadeType.ALL,
+		orphanRemoval = true
 	)
 	private List<Show> shows;
 	
