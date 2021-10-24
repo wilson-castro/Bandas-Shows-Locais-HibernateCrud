@@ -53,7 +53,10 @@ List<Local> locais = (List<Local>) request.getAttribute("locais");
 			<tr>
 				<td><%=lugar.getId() %></td>
 				<td><%=lugar.getNome()%></td>
-				<td><%=lugar.getShows().size()%></td>
+				<td><%
+					int numShows = lugar.getShows() != null? lugar.getShows().size() : 0;
+						out.print(numShows);
+					%></td>
 				<td><%=lugar.getCapacidade()%></td>
 				<td>
 					<a href="FormControlLocais?operation=editar&idLocal=<%=lugar.getId()%>" class="Botao1">Editar</a>

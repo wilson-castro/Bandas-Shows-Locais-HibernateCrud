@@ -9,67 +9,96 @@ import java.util.List;
 
 import model.daos.DaoFactory;
 import model.daos.ShowDao;
+import model.entitys.Banda;
 import model.entitys.Show;
 
 public class ShowService {
 	private ShowDao dao;
-	
+
 	public ShowService() {
 		this.dao = DaoFactory.ShowDaoInstance();
 	}
-	
+
 	public void salvar(Show show) {
 		dao.save(show);
 	}
-	
-	public void salvarShowComDataString(Show show, String data_show) throws ParseException {
-		Calendar dataConvertida = null;	
-		
-		try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd")
-                  .parse(data_show);
-            dataConvertida = Calendar.getInstance();
-            dataConvertida.setTime(date);
-            
-            show.setData(dataConvertida);
-            salvar(show);
-            
-        } catch (ParseException e) {
-            System.out.println("Erro de conversão da data");
-            throw e;
 
+	public void salvarShowComDataString(Show show, String data_show) {
+		Calendar dataConvertida = null;
+
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		
+
+		dataConvertida = Calendar.getInstance();
+		dataConvertida.setTime(date);
+
+		show.setData(dataConvertida);
+		salvar(show);
+
 	}
-	
-	public List<Show> listarShows(){
+
+	public void salvarShowComDataString(Show show, String data_show, int[] bandasIds) {
+		Calendar dataConvertida = null;
+
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		dataConvertida = Calendar.getInstance();
+		dataConvertida.setTime(date);
+
+		show.setData(dataConvertida);
+
+		List<Banda> bandas = new ArrayList<Banda>();
+
+		for (int i = 0; i < bandasIds.length; i++) {
+			BandaService bandaService = new BandaService();
+			Banda banda = bandaService.procurarBanda((long) bandasIds[i]);
+
+			bandas.add(banda);
+		}
+
+		show.setBandas(bandas);
+
+		salvar(show);
+
+	}
+
+	public List<Show> listarShows() {
 		List<Show> shows = dao.findAll();
-		
+
 		return shows;
 	}
-	
-	public List<Show> listarShowsPorNomeDoLocal(String nomeLocal){
+
+	public List<Show> listarShowsPorNomeDoLocal(String nomeLocal) {
 		List<Show> shows = dao.findAll();
 		List<Show> showsFiltrados = new ArrayList<Show>();
-		
+
 		for (Show show : shows) {
 			if (show.getLocal_do_show().getNome().contains(nomeLocal)) {
 				showsFiltrados.add(show);
 			}
 		}
-		
+
 		return showsFiltrados;
 	}
-	
+
 	public void removerShow(Long idLocal) {
-		Show show  =procurarShow(idLocal);
-		
+		Show show = procurarShow(idLocal);
+
 		dao.delete(show);
-		
+
 	}
-	
+
 	public Show procurarShow(Long idShow) {
-		
+
 		return dao.findById(idShow);
 	}
 }

@@ -24,10 +24,12 @@ function validarShow() {
 	let data = form.data.value;
 	let locais = form.selectLocais.value;
 	
-	const todayDate =  new Date().toLocaleDateString('en-CA');
-	
-	if (data === todayDate) {
-		alert("Preencha  o campo 'data'")
+	const today = new Date().toISOString().slice(0, 10)
+	const yesterday = new Date(today);
+	yesterday.setDate(yesterday.getDate()-1);
+
+	if (data === yesterday) {
+		alert("Preencha  o campo 'data'");
 		form.data.focus();
 		return false;
 	}if (locais === "-selecione-") {

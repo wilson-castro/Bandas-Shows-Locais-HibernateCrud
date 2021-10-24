@@ -62,7 +62,11 @@ List<Banda> bandas = (List<Banda>) request.getAttribute("bandas");
 							<td><%=banda.getId()%></td>
 							<td><%=banda.getNome()%></td>
 							<td><%=banda.getGenero()%></td>
-							<td><%=banda.getShows().size()%></td>
+							<td>
+								<%
+									int numShows = banda.getShows() != null? banda.getShows().size() : 0;
+									out.print(numShows);
+								%>
 							<td>
 								<a href="FormControlBandas?operation=editar&idBanda=<%= banda.getId() %>">Editar</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;

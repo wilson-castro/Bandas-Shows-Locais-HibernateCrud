@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.entitys.Show" %>
 <%
 List<Show> shows = (List<Show>) request.getAttribute("shows");
+
+SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+String dataFormat = "";
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,8 +58,18 @@ List<Show> shows = (List<Show>) request.getAttribute("shows");
 			<tr>
 				<td><%=show.getId()%></td>
 				<td><%=show.getLocal_do_show().getNome()%></td>
-				<td><%=show.getData()%></td>
-				<td><%=show.getBandas().size()%></td>
+				<td>
+					<%
+					  dataFormat = formatDate.format(show.getData().getTime());
+					  out.print(dataFormat);
+					%>
+				</td>
+				<td>
+					<%
+					  int numBandas = show.getBandas() != null? show.getBandas().size() : 0;
+					  out.print(numBandas);
+					%>
+				</td>
 				<td><%=show.getLocal_do_show().getCapacidade()%></td>
 				<td>
 					<a href="FormControlShows?operation=editar&idShow=<%=show.getId()%>" class="Botao1">Editar</a>

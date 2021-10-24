@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,13 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.daos.ShowDao;
+import model.entitys.Local;
+import model.entitys.Show;
+import model.services.LocalService;
+import model.services.ShowService;
 
 @WebServlet(urlPatterns = { "/ControllerShows", "/shows","/shows/delete","/shows/insert",
 		"/shows/select","/shows/update" })
 public class ControllerShows extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    ShowDao dao = new ShowDao();
+    ShowService showService = new ShowService();
 
     public ControllerShows() {
         super();
@@ -47,20 +51,20 @@ public class ControllerShows extends HttpServlet {
 	
 	protected void novoShow(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*Show show = new Show();
-
+		LocalService localService = new LocalService();
+		
 		String data =  request.getParameter("data");
-		int idLocal = Integer.parseInt(request.getParameter("selectLocais"));
+		Long idLocal = Long.parseLong(request.getParameter("selectLocais"));
 		
+		Show show = new Show();
+		Local local = localService.procurarLocal(idLocal);
 		
-		show.setIdLocal(idLocal);
-		show.setData(data);*/
+		show.setLocal_do_show(local);
 		
 		if (request.getParameterValues("List_BandaIDs") == null ) {
-			//dao.adicionarShow(show, null);
-						
+				showService.salvarShowComDataString(show, data);			
 		}else {
-			/*String[] checkboxIdsList = request.getParameterValues("List_BandaIDs");
+			String[] checkboxIdsList = request.getParameterValues("List_BandaIDs");
 			int size = checkboxIdsList.length;
 						
 			int[] idsList = new int[size];
@@ -68,10 +72,11 @@ public class ControllerShows extends HttpServlet {
 			for (int i = 0; i < size; i++) {
 			    idsList[i] = Integer.parseInt(checkboxIdsList[i]);
 			}
-			dao.adicionarShow(show, idsList);*/
+			
+			showService.salvarShowComDataString(show,data, idsList);
 		}
 		
-		response.sendRedirect("/projeto/shows");
+		response.sendRedirect("/HibernateCrud/shows");
 	}
 	protected void editarShow(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

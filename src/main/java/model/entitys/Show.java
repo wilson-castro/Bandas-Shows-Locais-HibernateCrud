@@ -29,8 +29,7 @@ public class Show {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id", referencedColumnName="LocalID")
+	@ManyToOne()
 	private Local local_do_show;
 	
 	@ManyToMany(mappedBy = "shows")
