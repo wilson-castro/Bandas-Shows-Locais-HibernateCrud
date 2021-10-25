@@ -3,6 +3,7 @@ package model.entitys;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,9 +35,9 @@ public class Show {
     @JoinColumn(name = "local_id")
 	private Local local_do_show;
 	
-	@ManyToMany()
-	@JoinTable(name="bandas_do_show", joinColumns = @JoinColumn(name="bandaID")
-	,inverseJoinColumns = @JoinColumn(name="showID"))
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="bandas_do_show", joinColumns = @JoinColumn(name="ShowID")
+	,inverseJoinColumns = @JoinColumn(name="bandaID"))
 	private List<Banda> bandas;
 	
 	public Show() {

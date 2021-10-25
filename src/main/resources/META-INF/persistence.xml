@@ -7,6 +7,9 @@
 
 	<persistence-unit name="projeto_JPA" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>  
+   	<class>model.entitys.Banda</class>
+   	<class>model.entitys.Show</class>
+   	<class>model.entitys.Local</class>
    	
 	 <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
