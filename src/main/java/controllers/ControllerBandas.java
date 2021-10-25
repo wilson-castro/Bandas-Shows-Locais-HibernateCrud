@@ -63,20 +63,7 @@ public class ControllerBandas extends HttpServlet {
 		banda.setGenero(genero);
 		banda.setNome(nome);
 
-		if (request.getParameterValues("List_ShowsIDs") == null) {
-			bandaService.alterarBanda(banda);
-
-		} else {
-			String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
-			int size = checkboxIdsList.length;
-
-			int[] idsList = new int[size];
-
-			for (int i = 0; i < size; i++) {
-				idsList[i] = Integer.parseInt(checkboxIdsList[i]);
-			}
-			bandaService.alterarBanda(banda, idsList);
-		}
+		bandaService.alterarBanda(banda);
 
 		response.sendRedirect("/HibernateCrud/bandas");
 	}
@@ -92,20 +79,7 @@ public class ControllerBandas extends HttpServlet {
 		banda.setGenero(genero);
 		banda.setNome(nome);
 		
-		if (request.getParameterValues("List_ShowsIDs") == null) {
-			bandaService.salvar(banda);
-
-		} else {
-	        String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
-			int size = checkboxIdsList.length;
-
-			int[] idsList = new int[size];
-
-			for (int i = 0; i < size; i++) {
-				idsList[i] = Integer.parseInt(checkboxIdsList[i]);
-			}
-			bandaService.salvar(banda, idsList);
-		}
+		bandaService.salvar(banda);
 
 		response.sendRedirect("/HibernateCrud/bandas");
 	}

@@ -6,6 +6,7 @@
 <%
 List<Local> locais = (List) request.getAttribute("locais");
 List<Banda> bandas = (List) request.getAttribute("bandas");
+List<Banda> bandasDoShow = new ArrayList<Banda>();
 List<Integer> idsIguaisShows = new ArrayList<>();
 
 String titulo = request.getAttribute("titulo").toString();
@@ -14,6 +15,11 @@ String dataDefault = request.getAttribute("dataDefault").toString();
 String actionForm  = request.getAttribute("actionForm").toString();
 String textoBotao = request.getAttribute("txtBotao").toString();
 Show show = (Show) request.getAttribute("show");
+
+if(titulo.equals("Editar")){
+	bandasDoShow = show.getBandas();
+}
+
 
 %>
 <!DOCTYPE html>
@@ -55,6 +61,15 @@ Show show = (Show) request.getAttribute("show");
 			<div class="group-checkbox" style="margin-bottom: 10px;">
 				<% for(Banda banda : bandas){ %>
 					<input type="checkbox"
+					<%	
+						for(Banda bandaDoShow:bandasDoShow){
+					
+							if(banda.getId()==bandaDoShow.getId()){
+								out.print("checked");
+							}
+						}
+					%>
+					
 					 id="<%=banda.getId() %>"
 					 name="List_BandaIDs" value=<%= banda.getId() %>
 					>

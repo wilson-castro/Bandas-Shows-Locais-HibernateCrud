@@ -4,7 +4,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Agenda de contatos</title>
+<title>crud hibernate</title>
 </head>
 <body>
 

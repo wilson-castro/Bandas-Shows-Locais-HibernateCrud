@@ -92,6 +92,7 @@ public class ControllerShows extends HttpServlet {
 		show.setLocal_do_show(local);
 
 		if (request.getParameterValues("List_BandaIDs") == null ) {
+			show.setBandas(null);
 			showService.salvarShowComDataString(show, data);
 						
 		}else {

@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.entitys.Banda;
-import model.entitys.Show;
 import model.services.BandaService;
-import model.services.ShowService;
 
 
 @WebServlet("/FormControlBandas")
@@ -29,10 +26,7 @@ public class FormControllBandas extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("operation");
-		ShowService showService  =new ShowService();
-		
-		List<Show> shows = showService.listarShows();
-		
+				
 		if(operation.equals("novo")) {
 						
 			request.setAttribute("titulo", "Criar");
@@ -41,7 +35,6 @@ public class FormControllBandas extends HttpServlet {
 			request.setAttribute("txtBotao", "Adicionar");
 			request.setAttribute("textoInputNome", "");
 			request.setAttribute("actionForm", "bandas/insert");
-			request.setAttribute("shows", shows);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("formularioBandas.jsp");
 			rd.forward(request, response);
@@ -55,7 +48,6 @@ public class FormControllBandas extends HttpServlet {
 			request.setAttribute("selected", banda.getGenero().toString());
 			request.setAttribute("txtBotao", "Alterar");
 			request.setAttribute("textoInputNome", banda.getNome());
-			request.setAttribute("shows", shows);
 			request.setAttribute("Banda", banda);			
 			request.setAttribute("actionForm", "bandas/update");
 			

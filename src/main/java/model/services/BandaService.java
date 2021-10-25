@@ -6,7 +6,6 @@ import java.util.List;
 import model.daos.BandaDao;
 import model.daos.DaoFactory;
 import model.entitys.Banda;
-import model.entitys.Show;
 import model.enums.Genero;
 
 public class BandaService {
@@ -18,23 +17,6 @@ public class BandaService {
 	
 	public void salvar(Banda banda) {
 		dao.save(banda);
-	}
-	
-	public void salvar(Banda banda, int[] showsIds) {
-
-		List<Show> shows = new ArrayList<Show>();
-
-		for (int i = 0; i < showsIds.length; i++) {
-			ShowService showService = new ShowService();
-			Show show = showService.procurarShow((long) showsIds[i]);
-
-			shows.add(show);
-		}
-
-		banda.setShows(shows);
-
-		salvar(banda);
-
 	}
 	
 	public List<Banda> listarBandas(){
@@ -58,23 +40,6 @@ public class BandaService {
 	
 	public void alterarBanda(Banda banda) {		
 		dao.update(banda);
-	}
-	
-	public void alterarBanda(Banda banda , int[] showsIds) {
-
-		List<Show> shows = new ArrayList<Show>();
-
-		for (int i = 0; i < showsIds.length; i++) {
-			ShowService showService = new ShowService();
-			Show show = showService.procurarShow((long) showsIds[i]);
-
-			shows.add(show);
-		}
-
-		banda.setShows(shows);
-
-		alterarBanda(banda);
-
 	}
 	
 	public Banda procurarBanda(Long idBanda) {

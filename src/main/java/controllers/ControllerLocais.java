@@ -57,20 +57,8 @@ public class ControllerLocais extends HttpServlet {
 		local.setNome(nome);
 		local.setCapacidade(capacidade);
 
-		if (request.getParameterValues("List_ShowsIDs") == null ) {
-			localService.salvar(local);
+		localService.salvar(local);
 						
-		}else {
-			String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
-			int size = checkboxIdsList.length;
-						
-			int[] idsList = new int[size];
-			
-			for (int i = 0; i < size; i++) {
-			    idsList[i] = Integer.parseInt(checkboxIdsList[i]);
-			}
-			localService.salvar(local, idsList);
-		}
 		
 		response.sendRedirect("/HibernateCrud/locais");
 	}
@@ -86,21 +74,8 @@ public class ControllerLocais extends HttpServlet {
 		local.setNome(nome);
 		local.setCapacidade(capacidade);
 		
-		if (request.getParameterValues("List_ShowsIDs") == null ) {
-			localService.alterarLocal(local);
+		localService.alterarLocal(local);
 						
-		}else {
-			String[] checkboxIdsList = request.getParameterValues("List_ShowsIDs");
-			int size = checkboxIdsList.length;
-						
-			int[] idsList = new int[size];
-			
-			for (int i = 0; i < size; i++) {
-			    idsList[i] = Integer.parseInt(checkboxIdsList[i]);
-			}
-			localService.alterarLocal(local, idsList);
-		}
-		
 		response.sendRedirect("/HibernateCrud/locais");
 	}
 	

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -33,7 +34,9 @@ public class Show {
     @JoinColumn(name = "local_id")
 	private Local local_do_show;
 	
-	@ManyToMany(mappedBy = "shows")
+	@ManyToMany()
+	@JoinTable(name="bandas_do_show", joinColumns = @JoinColumn(name="bandaID")
+	,inverseJoinColumns = @JoinColumn(name="showID"))
 	private List<Banda> bandas;
 	
 	public Show() {

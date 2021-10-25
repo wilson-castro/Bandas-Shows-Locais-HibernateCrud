@@ -9,8 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -33,9 +31,7 @@ public class Banda implements BaseBean {
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
 	
-	@ManyToMany()
-	@JoinTable(name="shows_da_banda", joinColumns = @JoinColumn(name="bandaID")
-	,inverseJoinColumns = @JoinColumn(name="showID"))
+	@ManyToMany(mappedBy = "bandas")
 	private List<Show> shows;
 	
 	public Banda() {

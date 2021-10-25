@@ -1,12 +1,10 @@
 package model.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.daos.DaoFactory;
 import model.daos.LocalDao;
 import model.entitys.Local;
-import model.entitys.Show;
 
 public class LocalService {
 private LocalDao dao;
@@ -19,19 +17,6 @@ private LocalDao dao;
 		dao.save(local);
 	}
 	
-	public void salvar(Local local,int[] listShowsIds) {
-		List<Show> shows = new ArrayList<Show>();
-		ShowService showService = new ShowService();
-		
-		for(int i=0; i<listShowsIds.length; i++) {
-			Show show = showService.procurarShow((long) listShowsIds[i]);
-			shows.add(show);
-		}
-		
-		local.setShows(shows);
-		
-		dao.save(local);
-	}
 	
 	public List<Local> listarLocais(){
 		List<Local> locais = dao.findAll();
@@ -55,23 +40,6 @@ private LocalDao dao;
 	public void alterarLocal(Local local) {
 		dao.update(local);
 		
-	}
-	
-	public void alterarLocal(Local local , int[] showsIds) {
-
-		List<Show> shows = new ArrayList<Show>();
-
-		for (int i = 0; i < showsIds.length; i++) {
-			ShowService showService = new ShowService();
-			Show show = showService.procurarShow((long) showsIds[i]);
-
-			shows.add(show);
-		}
-
-		local.setShows(shows);
-
-		alterarLocal(local);
-
 	}
 	
 	public Local procurarLocal(Long idLocal) {
