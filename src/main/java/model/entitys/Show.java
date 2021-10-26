@@ -31,11 +31,11 @@ public class Show {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "local_id")
 	private Local local_do_show;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany
 	@JoinTable(name="bandas_do_show", joinColumns = @JoinColumn(name="ShowID")
 	,inverseJoinColumns = @JoinColumn(name="bandaID"))
 	private List<Banda> bandas;

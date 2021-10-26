@@ -6,6 +6,7 @@ import java.util.List;
 import model.daos.BandaDao;
 import model.daos.DaoFactory;
 import model.entitys.Banda;
+import model.entitys.Show;
 import model.enums.Genero;
 
 public class BandaService {
@@ -26,17 +27,33 @@ public class BandaService {
 	}
 	
 	public List<Banda> listarBandaPorNomeEGenero(String nome, ArrayList<Genero> generos){
-		List<Banda> bandas = dao.findBandaByNameAndKind(nome, generos);
+		List<Banda> bandas = new ArrayList<Banda>();
 		
+		if (generos==null) {
+			bandas = dao.findBandaByName(nome);
+
+		}else {
+		    bandas = dao.findBanaByNameInKinds(nome, generos);
+		}
 		return bandas;
 	}
 	
 	public void removerBanda(Long idBanda) {
 		Banda banda = procurarBanda(idBanda);
 		
+		if (banda.getShows() != null) {			
+			for(Show show : banda.getShows()) {				
+				ShowService showService= new ShowService();
+				
+				show.getBandas().remove(banda);
+				
+				showService.alterarShow(show);
+				
+			}
+		}
+		
 		dao.delete(banda);
 	}
-	
 	
 	public void alterarBanda(Banda banda) {		
 		dao.update(banda);

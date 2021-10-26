@@ -66,6 +66,7 @@ String dataFormat = "";
 					%>
 				<td>
 					<%
+					  System.out.println(show.getData());
 					  dataFormat = formatDate.format(show.getData().getTime());
 					  out.print(dataFormat);
 					%>
