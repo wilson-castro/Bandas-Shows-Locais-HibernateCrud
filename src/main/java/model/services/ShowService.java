@@ -1,9 +1,9 @@
 package model.services;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,38 +22,32 @@ public class ShowService {
 		dao.save(show);
 	}
 
-	public void salvarShowComDataString(Show show, String data_show) {
-		Calendar dataConvertida = null;
+	public void salvarShowComDataString(Show show, String data) {
 
 		Date date = null;
-		try {
-			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		dataConvertida = Calendar.getInstance();
-		dataConvertida.setTime(date);
-
-		show.setData(dataConvertida);
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            date = new java.sql.Date( ((Date)formatter.parse(data)).getTime() );
+        } catch (ParseException e) {            
+            e.printStackTrace();
+        }
+        
+		show.setData(date);
 		salvar(show);
 
 	}
 
-	public void salvarShowComDataString(Show show, String data_show, int[] bandasIds) {
-		Calendar dataConvertida = null;
+	public void salvarShowComDataString(Show show, String data, int[] bandasIds) {
 
 		Date date = null;
-		try {
-			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		dataConvertida = Calendar.getInstance();
-		dataConvertida.setTime(date);
-
-		show.setData(dataConvertida);
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            date = new java.sql.Date( ((Date)formatter.parse(data)).getTime() );
+        } catch (ParseException e) {            
+            e.printStackTrace();
+        }
+        
+		show.setData(date);
 
 		List<Banda> bandas = new ArrayList<Banda>();
 
@@ -88,43 +82,35 @@ public class ShowService {
 
 		return showsFiltrados;
 	}
-	
+
 	public void alterarShow(Show show) {
 		dao.update(show);
 	}
-	
-	public void alterarShow(Show show, String data_show) {
-		Calendar dataConvertida = null;
 
+	public void alterarShow(Show show, String data) {
 		Date date = null;
-		try {
-			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		dataConvertida = Calendar.getInstance();
-		dataConvertida.setTime(date);
-
-		show.setData(dataConvertida);
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            date = new java.sql.Date( ((Date)formatter.parse(data)).getTime() );
+        } catch (ParseException e) {            
+            e.printStackTrace();
+        }
+        
+		show.setData(date);
 		alterarShow(show);
 
 	}
 
-	public void alterarShow(Show show, String data_show, int[] bandasIds) {
-		Calendar dataConvertida = null;
-
+	public void alterarShow(Show show, String data, int[] bandasIds) {
 		Date date = null;
-		try {
-			date = new SimpleDateFormat("yyyy-MM-dd").parse(data_show);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            date = new java.sql.Date( ((Date)formatter.parse(data)).getTime() );
+        } catch (ParseException e) {            
+            e.printStackTrace();
+        }
 
-		dataConvertida = Calendar.getInstance();
-		dataConvertida.setTime(date);
-
-		show.setData(dataConvertida);
+		show.setData(date);
 
 		List<Banda> bandas = new ArrayList<Banda>();
 
@@ -140,6 +126,7 @@ public class ShowService {
 		alterarShow(show);
 
 	}
+
 	public void removerShow(Long idLocal) {
 		Show show = procurarShow(idLocal);
 

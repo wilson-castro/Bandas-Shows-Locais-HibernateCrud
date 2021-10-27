@@ -1,9 +1,8 @@
 package model.entitys;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,8 +27,8 @@ public class Show {
 	private Long id;
 	
 	@Column(name="data_do_show", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar data;
+	@Temporal(TemporalType.DATE)
+	private Date data;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "local_id")
@@ -44,14 +43,14 @@ public class Show {
 		
 	}
 	
-	public Show(Long id, Calendar data, Local local_do_show) {
+	public Show(Long id, Date data, Local local_do_show) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.local_do_show = local_do_show;
 	}
 
-	public Show(Long id, Calendar data, Local local_do_show, List<Banda> bandas) {
+	public Show(Long id, Date data, Local local_do_show, List<Banda> bandas) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -67,11 +66,11 @@ public class Show {
 		this.id = id;
 	}
 
-	public Calendar getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

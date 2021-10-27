@@ -32,7 +32,7 @@ public class Local implements BaseBean {
 	
 	@OneToMany( 
 		mappedBy="local_do_show" ,
-	    fetch = FetchType.EAGER,
+	    fetch = FetchType.LAZY,
 		cascade = CascadeType.ALL,
 		orphanRemoval = true
 	)

@@ -30,6 +30,7 @@ public class FormControllShows extends HttpServlet {
     public FormControllShows() {
         super();
     }
+  
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("operation");
@@ -60,13 +61,10 @@ public class FormControllShows extends HttpServlet {
 		
 			Show show = showService.procurarShow(idShow);
 			
-					
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-			String dataFormat = formatDate.format(show.getData().getTime());
 			
 			request.setAttribute("titulo", "Editar");
 			request.setAttribute("selected", show.getLocal_do_show().getId());
-			request.setAttribute("dataDefault", dataFormat);
+			request.setAttribute("dataDefault", show.getData());
 			request.setAttribute("txtBotao", "Alterar");
 			request.setAttribute("locais", locais);
 			request.setAttribute("bandas", bandas);
@@ -80,7 +78,7 @@ public class FormControllShows extends HttpServlet {
 			
 			
 		} else {
-			response.sendRedirect("ListarBandas");
+			response.sendRedirect("ListarShows");
 		}
 		
 	}

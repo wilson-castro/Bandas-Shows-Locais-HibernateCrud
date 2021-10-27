@@ -2,12 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.ZoneId" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.TimeZone" %>
+
 <%@ page import="model.entitys.Show" %>
 <%
 List<Show> shows = (List<Show>) request.getAttribute("shows");
 
-SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-String dataFormat = "";
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -65,10 +71,8 @@ String dataFormat = "";
 
 					%>
 				<td>
-					<%
-					  System.out.println(show.getData());
-					  dataFormat = formatDate.format(show.getData().getTime());
-					  out.print(dataFormat);
+					<%	
+					  	out.print(show.getData());
 					%>
 				</td>
 				<td>

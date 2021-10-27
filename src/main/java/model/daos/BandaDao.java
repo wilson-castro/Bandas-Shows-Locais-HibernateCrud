@@ -10,6 +10,7 @@ import model.enums.Genero;
 import utils.GenericDao;
 
 public class BandaDao extends GenericDao<Banda, Long> {
+
 	
 	@SuppressWarnings("unchecked")
 	public List<Banda> findBandaByName(String bandaNome){
